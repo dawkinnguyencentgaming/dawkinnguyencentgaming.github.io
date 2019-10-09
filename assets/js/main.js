@@ -4,81 +4,68 @@
 
   $(window).on('load', function() {
 
+    /* 
+   MixitUp
+   ========================================================================== */
+  $('#portfolio').mixItUp();
+
+  /* 
+   One Page Navigation & wow js
+   ========================================================================== */
+    var OnePNav = $('.onepage-nev');
+    var top_offset = OnePNav.height() - -0;
+    OnePNav.onePageNav({
+      currentClass: 'active',
+      scrollOffset: top_offset,
+    });
+  
   /*Page Loader active
-  ========================================================*/
-  $('#preloader').fadeOut();
+    ========================================================*/
+    $('#preloader').fadeOut();
 
   // Sticky Nav
     $(window).on('scroll', function() {
-        if ($(window).scrollTop() > 50) {
+        if ($(window).scrollTop() > 200) {
             $('.scrolling-navbar').addClass('top-nav-collapse');
         } else {
             $('.scrolling-navbar').removeClass('top-nav-collapse');
         }
     });
 
-    // one page navigation 
-    $('.navbar-nav').onePageNav({
-      currentClass: 'active'
-    });
+    /* slicknav mobile menu active  */
+    $('.mobile-menu').slicknav({
+        prependTo: '.navbar-header',
+        parentTag: 'liner',
+        allowParentLinks: true,
+        duplicate: true,
+        label: '',
+        closedSymbol: '<i class="icon-arrow-right"></i>',
+        openedSymbol: '<i class="icon-arrow-down"></i>',
+      });
 
-    /* Auto Close Responsive Navbar on Click
-    ========================================================*/
-    function close_toggle() {
-        if ($(window).width() <= 768) {
-            $('.navbar-collapse a').on('click', function () {
-                $('.navbar-collapse').collapse('hide');
-            });
-        }
-        else {
-            $('.navbar .navbar-inverse a').off('click');
-        }
-    }
-    close_toggle();
-    $(window).resize(close_toggle);
-
-    /* WOW Scroll Spy
+      /* WOW Scroll Spy
     ========================================================*/
      var wow = new WOW({
       //disabled for mobile
         mobile: false
     });
 
-    wow.init();    
+    wow.init();
 
-     /* Testimonials Carousel 
+    /* Nivo Lightbox 
     ========================================================*/
-    var owl = $("#testimonials");
-      owl.owlCarousel({
-        loop: true,
-        nav: false,
-        dots: true,
-        center: true,
-        margin: 15,
-        slideSpeed: 1000,
-        stopOnHover: true,
-        autoPlay: true,
-        responsiveClass: true,
-        responsiveRefreshRate: true,
-        responsive : {
-            0 : {
-                items: 1
-            },
-            768 : {
-                items: 2
-            },
-            960 : {
-                items: 3
-            },
-            1200 : {
-                items: 3
-            },
-            1920 : {
-                items: 3
-            }
-        }
-      });  
-      
+    $('.lightbox').nivoLightbox({
+        effect: 'fadeScale',
+        keyboardNav: true,
+      });
+
+    /* Counter
+    ========================================================*/
+    $('.counterUp').counterUp({
+     delay: 10,
+     time: 1000
+    });
+
 
     /* Back Top Link active
     ========================================================*/
@@ -99,6 +86,8 @@
         }, 600);
         return false;
       });
+
+
 
   });      
 
